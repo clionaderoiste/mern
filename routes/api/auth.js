@@ -41,6 +41,7 @@ router.post(
         try {
             let user = await User.findOne({ email });
             //See if the user exists
+            //If the user doesn't exist return an opaque error
             if (!user) {
                 return res.status(400).json({
                     errors: [
@@ -51,9 +52,10 @@ router.post(
                 });
             }
 
-            //compare to see if the password is right
+            //compare to see if the password is right, you pass it the plain text password and it checks it against the encrypted one in the DB
             const isMatch = await bcrypt.compare(password, user.password);
 
+            //If the passwords don't match return an opaque error
             if (!isMatch) {
                 return res.status(400).json({
                     errors: [
@@ -64,7 +66,7 @@ router.post(
                 });
             }
 
-            //payload with token
+            //payload with token as we want to send back an auth token
             const payload = {
                 user: {
                     id: user.id,
@@ -80,7 +82,6 @@ router.post(
                     res.json({ token });
                 }
             );
-            //This will result in a token that has encoded in its body id, iat (issued at), exp (time of expiry)
         } catch (err) {
             console.error(err.message);
             res.status(500).send('Server error');
