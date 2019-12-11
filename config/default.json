@@ -1,4 +1,6 @@
 {
-    "mongoURI": "mongodb+srv://cliona:AazT1HC7YfwIxxOm@devconnector-okumr.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret": "supersecrettoken"
+  "mongoURI": "mongodb+srv://cliona:AazT1HC7YfwIxxOm@devconnector-okumr.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "supersecrettoken",
+  "githubClientId": "f75e743a3a19b0cea65a",
+  "githubSecret": "416830ec9552226cb750b3df94a7a0b7dd168962"
 }
