@@ -226,13 +226,16 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
       return res.status(401).json('User not authorized');
     }
 
-    //Get the remove index of the like made by the user
-    //map over the user filed of the likes, turning to string for matching
+    //Get the remove index of the comment made by the user
+    //map over the user filed of the comments, turning to string for matching
     //get the index of the one that matches the user of the request
     const removeIndex = post.comments
       .map(comment => comment.user.toString())
       .indexOf(req.user.id);
+    //remove the 1 comment at the given index
     post.comments.splice(removeIndex, 1);
+
+    //save the post and send the comment back
     await post.save();
     res.json(post.comments);
   } catch (error) {
