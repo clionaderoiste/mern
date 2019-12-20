@@ -2,12 +2,12 @@ import uuid from 'uuid';
 import { SET_ALERT, REMOVE_ALERT } from './types';
 
 //dispatch because of thunk middleware
-export const setAlert = (message, alertType) => dispatch => {
+export const setAlert = (message, alertType, timeout = 5000) => dispatch => {
   const id = uuid.v4();
   dispatch({
     type: SET_ALERT,
     payload: { message, alertType, id }
   });
 
-  setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), 5000);
+  setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), timeout);
 };
