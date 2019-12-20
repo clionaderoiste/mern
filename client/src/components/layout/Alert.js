@@ -4,16 +4,16 @@ import { connect } from 'react-redux';
 
 const Alert = ({ alerts }) =>
   alerts !== null &&
-  alerts.length > O &&
-  alerts.map(alert => {
-    <div key={alert.id} className={`alert alert-${alert.type}`}>
+  alerts.length > 0 &&
+  alerts.map(alert => (
+    <div key={alert.id} className={`alert alert-${alert.alertType}`}>
       {alert.message}
-    </div>;
-  });
+    </div>
+  ));
 
 Alert.propTypes = {};
 
 const mapStateToProps = state => ({
   alerts: state.alert
 });
-export default connect()(Alert);
+export default connect(mapStateToProps)(Alert);
